@@ -7,7 +7,7 @@
 
 **Evidence labels used throughout:** `[MARKET]` published market source · `[AHREFS]` Ahrefs pull · `[SERP]` live search-result inspection · `[INFERENCE]` reasoned judgement from labelled evidence.
 
-> **Tooling caveat (read first).** The Ahrefs MCP connection configured for this workspace was in an **error state** on 2 Sep 2026 (server failed live tool discovery), so no `[AHREFS]` metrics appear below. Per the brief's own hierarchy — *"If Ahrefs KD is low but live SERP is…, live SERP wins"* — all keep/reject calls below are made on **live SERP evidence + economics**, which is the decisive layer. Volume/KD columns are marked **PENDING AHREFS** and must be filled from the **Saudi Arabia database** before final page prioritisation. To restore access: reconnect the Ahrefs MCP server (Cursor Settings → Tools & MCP → Ahrefs → reconnect/authenticate), or add an Ahrefs API key as a Cloud Agent secret (Cursor Dashboard → Cloud Agents → Secrets). Nothing below invents volumes.
+> **Tooling note.** Ahrefs access was established mid-session on 2 Sep 2026 via the live API (owner-supplied key); all `[AHREFS]` figures in §C0/§E/§F/§G are real pulls from that session (country=sa primary, us/gb supplementary). Headline outcome: the niche's long-tail is **untracked** in every Ahrefs database tested, and KD ≈ 0 wherever computable — so per the brief's own hierarchy (*"live SERP wins"*), the live SERP register (§D) remains the decision layer, with Ahrefs as confirmation. Nothing in this report invents volumes.
 
 ---
 
@@ -40,6 +40,8 @@
 - EOR-led queries ("hire expat engineers saudi arabia") — owned by EOR providers (WTS, Aspirock, Auxilium) and listicles; intent is "employ without an entity," not "recruit for me." Reject as a target; note as adjacent content only. `[SERP]`
 - All candidate/CV-farm terms ("oil and gas jobs in saudi arabia", "mining jobs saudi", "aramco jobs") — page one is Aramco's own careers portal, LinkedIn jobs, Jooble, Naukrigulf, GulfTalent. High volume, wrong intent, wrong economics. Reject. `[SERP]`
 - Subsea-for-KSA — regional subsea demand centres on UAE/Qatar offshore; KSA-specific subsea employer demand is thin and the SERP is served by UAE offshore specialists. Reject for KSA targeting. `[SERP]` `[INFERENCE]`
+
+**Ahrefs confirmation (2 Sep 2026 pm):** every kept term is untracked in the SA database (true ultra-long-tail), and KD is 0–5 wherever Ahrefs can compute it — the gap-first ranking above is unchanged, and no kept term requires link acquisition. The client domain baseline is DR 0.0 / 1 organic keyword / 0 traffic, so the realistic win order is weakest-SERP-first: mining cluster → drilling/wells leadership → project leadership → the O&G head term as the hub's slower-burn core. `[AHREFS]`
 
 ---
 
@@ -92,9 +94,41 @@ Vocational trainers, junior technicians, generic labour/manpower categories, and
 
 ---
 
-## C. Keyword universe (Saudi Arabia database — Ahrefs metrics PENDING)
+## C. Keyword universe (Saudi Arabia database — Ahrefs pulls COMPLETE, 2 Sep 2026)
 
-All keep/reject decisions below are for **KSA / Riyadh only**. UAE/Bahrain/Qatar were inspected once for contrast and are labelled **[EXISTING RANK MARKETS — DO NOT TARGET]**; none of their terms appear in the keep list. Volumes/KD/CPC to be pulled from **Ahrefs Keywords Explorer, database = Saudi Arabia**, on the exact terms below once access is restored.
+**Ahrefs access:** live API (owner-supplied key, 2 Sep 2026), `keywords-explorer/overview` + `matching-terms`; country=sa primary, country=us/gb supplementary. Raw pulls logged in §I.
+
+### C0. What the Ahrefs Saudi database actually contains (decision-shaping)
+
+| Query (country=sa) | Volume | KD | CPC (API units) | Notes |
+|---|---|---|---|---|
+| recruitment agency saudi arabia | 150 | — | 30 | The only meaningfully tracked employer-side head term |
+| oil and gas jobs in saudi arabia | 100 | 0 | 2 | Candidate trap — the biggest tracked term in the space |
+| recruitment agency riyadh | 60 | — | — | Employer-side, generic |
+| manpower supply saudi arabia | 40 | — | — | Employer-side, blue-collar gravity |
+| mining jobs in saudi arabia | 30 | — | 4 | Candidate |
+| executive search saudi arabia | 10 | — | 25 | Employer-side |
+| oil and gas recruitment | 0 | — | — | Tracked, zero SA volume |
+| drilling jobs saudi arabia | 0 | — | — | Tracked, zero SA volume |
+| **All 23 discipline/geo long-tail terms tested** ("mining recruitment agency saudi arabia", "drilling superintendent recruitment saudi arabia", "commissioning manager recruitment saudi arabia", "epcm recruitment saudi arabia", "oil and gas recruitment agency riyadh", etc.) | **untracked** | — | — | Not present in Ahrefs' SA database at all |
+
+**The same 23 long-tail terms are untracked in Ahrefs' US and UK databases too** — true ultra-long-tail queries no keyword tool can see. Where bare category terms ARE tracked, KD is 0–12 everywhere `[AHREFS]`:
+
+| Bare term | US vol / KD | UK vol / KD | SA vol |
+|---|---|---|---|
+| oil and gas recruitment agency | 200 / 0 | 30 / 5 | 0 |
+| mining recruitment agency | 150 / 2 | 60 / — | 0 |
+| energy executive search | 400 / 0 | 40 / 12 | 0 |
+| commissioning engineer jobs | 100 / 0 | 150 / 0 | 0 |
+| drilling superintendent jobs | 10 / 0 | 10 / — | 0 |
+
+**Interpretation (read before the cluster tables):**
+1. **Ahrefs cannot arbitrate the long-tail in this niche — the live SERP register (§D) is the decision layer**, exactly as the brief's supremacy rule anticipated. Ahrefs' role became confirmation: KD ≈ 0 wherever measurable — no kept term needs a link campaign; legitimate page quality + topical depth is the whole game. `[AHREFS]`
+2. **Tracked SA demand concentrates in generic head terms** ("recruitment agency saudi arabia/riyadh", "manpower supply saudi arabia"). The hub's core page must win those generic employer queries while its content depth captures the untracked discipline long-tail — Google ranks pages, not keywords, and each long-tail conversion is worth £15k–30k. `[AHREFS]` `[INFERENCE]`
+3. **Target-audience split (researched per the owner's audience instruction):** in-Kingdom searchers use generic "recruitment agency / manpower" phrasing; **Western HQ buyers** — the EPC HQs, operators, drilling contractors and mining houses in London/Houston/Aberdeen/Toronto who actually buy "Western engineers into KSA" — search the bare category terms from US/UK IPs, where they carry volume (200/150/400) at KD 0–2. One authoritative English hub serves both audiences; no geo-split needed. `[AHREFS]` `[INFERENCE]`
+4. **Domain baseline (Ahrefs, 1 Sep 2026):** gasandoilrecruitment.com — **DR 0.0, 1 organic keyword, 0 estimated organic traffic.** Competitors: NES Fircroft DR 58 (1,952 kw / 26.3k traffic), TASC DR 52 (172 kw), Progressive DR 35 (1,593 kw), Leap29 DR 29 (572 kw / 249 top-3), Globe 24-7 DR 22 (211 kw / 842 traffic). Consequences: (a) realistic first wins are the weak-SERP clusters whose incumbents are DR 22–29 or templated manpower sites — mining and drilling leadership first; (b) the owner-reported existing page-one ranks for Dubai/Abu Dhabi/Bahrain/Qatar are **not visible to Ahrefs at all** — verify in GSC before treating those markets as "held" (§G). `[AHREFS]`
+
+All keep/reject decisions below are for **KSA / Riyadh only**. UAE/Bahrain/Qatar were inspected once for contrast and are labelled **[EXISTING RANK MARKETS — DO NOT TARGET]**; none of their terms appear in the keep list.
 
 ### Cluster 1 — Oil & gas employer money terms (KSA)
 
@@ -207,15 +241,15 @@ Live set: The Saudi Elite (exact "Connecting Western Professionals With Saudi Ar
 
 ## E. True competitors (recurring on money terms)
 
-DR-only ranking deliberately excluded; assessment is from live page-one recurrence + on-page evidence.
+Assessment is from live page-one recurrence + on-page evidence; Ahrefs domain metrics (1 Sep 2026) added as context, not as the ranking criterion. Client baseline for contrast: **DR 0.0, 1 organic keyword, 0 traffic** `[AHREFS]`.
 
 | Competitor | Where they recur | Strength (evidence) | Weakness (evidence) | Our response if we enter |
 |---|---|---|---|---|
-| **NES Fircroft** | "engineering recruitment saudi", "riyadh" variant, renewables ME | KSA offices (Dhahran, Riyadh, NEOM); "only international technical solutions partner for Saudi Aramco… supplier status since 2017"; EOR with 4,000+ personnel managed `[SERP]` | Corporate, candidate-jobs-led pages; absent top-5 on the exact O&G head term; no "Western engineers" positioning; enterprise-EOR gravity `[SERP]` | Do not fight on EOR/enterprise. Win the senior-specialist, single/bulk contract + perm narrative with named-discipline depth and human proof (Peter Smith). |
-| **Leap29** | Manpower, renewables KSA, exec search, Vision 2030 pages | Best KSA content game among mid-tiers; Al Khobar HQ; Saudi-licensed entity (Leap29 Arabia) `[SERP]` | Generalist across many sectors; pages are capability claims with no named placements, rates, or case detail `[SERP]` | Out-specific them: discipline-level depth, real fee models, named project ecosystems (Aramco LTA pools, Ma'aden EPCM chain). |
-| **Progressive (SThree)** | Engineering head term, drilling, O&G upstream (Bing-side) | Global STEM brand; KSA employer pages; drilling specialism page `[SERP]` | Template pages; **title-tag bug** ("Manufacturing Engineering Jobs" on the KSA drilling page) signals weak page-level care `[SERP]` | Beat on page quality and intent match; their scale is brand, not page substance. |
-| **TASC Outsourcing** | Mining KSA (Bing-side) | Real KSA mining page ("$2.5tn mining boom… Saudisation-compliant") `[SERP]` | Regional generalist; not mining-only; no Western-senior-specialist angle `[SERP]` | Direct benchmark for the mining page — match its KSA fluency, exceed it with mining-only depth + Western talent pipeline. |
-| **Globe 24-7** | Mining KSA (Google-side) | Genuine global mining specialist; 20+ yrs, 90k network `[SERP]` | Ranks with a **generic EMEA page** — zero KSA substance `[SERP]` | The exact beatable-weakness case: a KSA-specific, evidence-dense page should out-relevance a regional overview. |
+| **NES Fircroft** — DR 58, 1,952 org kw, 26.3k traffic `[AHREFS]` | "engineering recruitment saudi", "riyadh" variant, renewables ME | KSA offices (Dhahran, Riyadh, NEOM); "only international technical solutions partner for Saudi Aramco… supplier status since 2017"; EOR with 4,000+ personnel managed `[SERP]` | Corporate, candidate-jobs-led pages; absent top-5 on the exact O&G head term; no "Western engineers" positioning; enterprise-EOR gravity `[SERP]` | Do not fight on EOR/enterprise. Win the senior-specialist, single/bulk contract + perm narrative with named-discipline depth and human proof (Peter Smith). |
+| **Leap29** — DR 29, 572 org kw, 249 in top-3 `[AHREFS]` | Manpower, renewables KSA, exec search, Vision 2030 pages | Best KSA content game among mid-tiers; Al Khobar HQ; Saudi-licensed entity (Leap29 Arabia) `[SERP]` | Generalist across many sectors; pages are capability claims with no named placements, rates, or case detail `[SERP]` | Out-specific them: discipline-level depth, real fee models, named project ecosystems (Aramco LTA pools, Ma'aden EPCM chain). The DR gap (0 vs 29) is closeable without bought links given KD≈0. |
+| **Progressive (SThree)** — DR 35, 1,593 org kw `[AHREFS]` | Engineering head term, drilling, O&G upstream (Bing-side), KSA exec search #1 | Global STEM brand; KSA employer pages; drilling specialism page; exec-search page explicitly placing Project Directors `[SERP]` | Template pages; **title-tag bug** ("Manufacturing Engineering Jobs" on the KSA drilling page) signals weak page-level care `[SERP]` | Beat on page quality and intent match; their scale is brand, not page substance. |
+| **TASC Outsourcing** — DR 52, 172 org kw `[AHREFS]` | Mining KSA (Bing-side) | Real KSA mining page ("$2.5tn mining boom… Saudisation-compliant") `[SERP]` | Regional generalist; not mining-only; no Western-senior-specialist angle `[SERP]` | Direct benchmark for the mining page — match its KSA fluency, exceed it with mining-only depth + Western talent pipeline. |
+| **Globe 24-7** — DR 22, 211 org kw, 842 traffic `[AHREFS]` | Mining KSA (Google-side) | Genuine global mining specialist; 20+ yrs, 90k network `[SERP]` | Ranks with a **generic EMEA page** — zero KSA substance; tiny organic footprint for a "specialist" `[SERP]` `[AHREFS]` | The exact beatable-weakness case: a KSA-specific, evidence-dense page should out-relevance a regional overview. |
 | **Local manpower cluster** (Prime Resources, Yaqoot, Teleport, Safwa, MSS, Soundlines, AJEETS, Sundus, Al Ahad, Talent Arabia) | O&G head terms, Riyadh terms, manpower terms | Exact-match KSA pages; licensed; fast mobilization claims `[SERP]` | Blue-collar/volume positioning; stuffed, templated copy; no senior/Western offer; Soundlines runs near-duplicate multi-domain city pages (doorway pattern — do not imitate) `[SERP]` | They are not our competitor for £300–400/day roles — but they hold the SERP real estate. Beat with quality, specificity, and trust signals Google can verify (schema, consistent NAP, real about/proof). |
 | **Adecco KSA** | O&G head term | Global brand, competent KSA industry page `[SERP]` | Generalist; no senior-specialist energy depth `[SERP]` | Differentiation by specialization. |
 | **The Saudi Elite** | "Western professionals" positioning term | Proof the exact positioning ranks in KSA `[SERP]` | Construction-only; small `[SERP]` | Validates our differentiator; no direct collision in energy/mining. |
@@ -225,7 +259,7 @@ DR-only ranking deliberately excluded; assessment is from live page-one recurren
 
 ## F. Easy-SERP shortlist (fee × intent × beatability)
 
-Ordered. Volumes/KD PENDING AHREFS (Saudi Arabia DB) — expect low absolute volumes; that is normal and acceptable for five-figure-fee B2B terms. `#1 is a target, never a guarantee.`
+Ordered. Ahrefs SA-DB note: every term below is **untracked** in the Saudi database (zero measurable volume) — normal for five-figure-fee B2B long-tail; the tracked demand they collectively ladder into is the generic head terms in §C0 ("recruitment agency saudi arabia" 150, "recruitment agency riyadh" 60). KD ≈ 0 wherever Ahrefs can compute it. `#1 is a target, never a guarantee.` `[AHREFS]`
 
 | # | Term (KSA) | Niche | Why it makes the list |
 |---|---|---|---|
@@ -258,6 +292,8 @@ Supporting architecture note (allowed per brief §7, not a build spec): *if* nic
 5. **Brand confusion.** "London's Premier Recruitment House" vs a KSA employer offer; mixed Zeus-MY/Abarrane-UK legal names; founded-1985 (Abarrane/LinkedIn) vs founded-2012 (site) inconsistency. Also a **reputation note**: brand SERP surfaces a Quora thread about UK O&G recruitment scam offers — the industry is impersonated often; the hub should carry anti-scam/verification reassurance (never charge candidates, official-domain emails only). `[SERP]`
 6. **Drupal/technical debt (mention only, per brief).** PHP 7.4/Drupal 9 EOL, no H1/sitemap/JSON-LD/IndexNow, demo pages indexable, canonical pointing at /gasandoilrecruitment — verified live 2 Sep 2026 (`/` returns title "Home | Gas and Oil Recruitment", no KSA copy). These cap the ceiling on everything above until addressed. `[SERP]`
 7. **Aramco ecosystem claims.** Never imply Aramco vendor approval or IKTVA status the firm doesn't hold; the 1992 Aramco contract heritage (via Abarrane, per abarrane.com) is usable only if the owner can evidence it. `[MARKET]` `[INFERENCE]`
+8. **Existing-rank markets may not be holding.** Ahrefs (1 Sep 2026) shows the whole domain at **1 organic keyword / 0 estimated traffic** — the owner-reported page-one ranks for Dubai/Abu Dhabi/Bahrain/Qatar are not visible to Ahrefs. They may exist on queries Ahrefs doesn't track, but verify in Google Search Console before relying on them, and before assuming any "don't touch what's working" constraint. `[AHREFS]`
+9. **DR 0 starting point.** With zero domain authority and no bought links allowed, early wins must come from the weakest SERPs (mining, drilling leadership) where incumbents are DR 22–29 or templated manpower sites; authority signals must be earned through real assets (the 1992 heritage story, Peter Smith's LinkedIn presence, schema, GSC/Bing/IndexNow plumbing, genuinely expert content). Expect the contested O&G head term to move slower than the gap clusters. `[AHREFS]` `[INFERENCE]`
 
 ---
 
@@ -278,7 +314,8 @@ Supporting architecture note (allowed per brief §7, not a build spec): *if* nic
 
 | Date (2026) | Tool | Database/locale | Queries / actions | Limitations |
 |---|---|---|---|---|
-| 2 Sep | Ahrefs MCP | — | Attempted tool discovery | **Failed — namespace in error state.** No Ahrefs metrics pulled. Reconnect via Cursor Settings → Tools & MCP, or supply API key as a Cloud Agent secret. Any Ahrefs ranking-data disruption is additionally unverifiable until reconnected. |
+| 2 Sep (am) | Ahrefs MCP | — | Attempted tool discovery | Failed — namespace in error state at the time |
+| 2 Sep (pm) | **Ahrefs API v3** (owner-supplied key) | **country=sa primary; us/gb supplementary** | `keywords-explorer/overview` on 40+ terms (full shortlist + external report's 12 + head terms + candidate benchmarks); `matching-terms` on "oil and gas recruitment"; `site-explorer/metrics` + `domain-rating` on client + 5 competitors | SA DB tracks only generic head terms in this niche; all 23 long-tail terms untracked in sa/us/gb alike; KD null where data is thin; CPC returned in API units. No ranking-data disruption observed in the API during this session |
 | 2 Sep | Live web search API (Google-side) | KSA-intent queries (English) | 16 queries: O&G head terms ×2, engineering head term, manpower, disciplines ×5, mining ×3, renewables ×2, exec search, expat-hiring, western-engineers, candidate traps ×2, Dubai contrast ×1, brand ×2 | API-returned page-one approximations, not a Riyadh-geo-located browser; positions approximate; AI Overview presence not directly observable |
 | 2 Sep | DuckDuckGo HTML endpoint (Bing-index proxy) | KSA-intent | "oil and gas recruitment agency saudi arabia"; "mining recruitment agency saudi arabia" | Proxy for Bing, not literal bing.com SERP |
 | 2 Sep | Direct Bing fetch | cc=sa | 1 attempt | Returned degraded/irrelevant results from this environment; Bing live check marked incomplete — verify from a KSA-locale browser |
@@ -286,7 +323,7 @@ Supporting architecture note (allowed per brief §7, not a build spec): *if* nic
 | 2 Sep | Published sources | — | HRSD engineering-Saudization announcement; Saudi Gazette 30 Jun 2026; Envoy Global alert; Ma'aden Ar Rjum EPCM award (Saudi Exchange filing, 22 Oct 2025); Hatch–Ma'aden partnership (Jul 2026); Ma'aden FY2025 results ($10.3bn revenue; $110bn 10-yr plan); Ministry of Energy NREP Round 6 (Oct 2025); ACWA Power H1 2026; MEED/pv-magazine NGHC commissioning (Aug 2026); Aramco supplier/IKTVA pages; abarrane.com about page; LinkedIn company data (507 followers, 4 staff) | — |
 | 2 Sep | Compensation evidence pulls (3 parallel workstreams) | KSA/Gulf | Airswift GETI 2026 (1 Sep 2026) role-level ME day rates + perm salaries; GETI 2025 PDF; Rigzone ME editorial rate estimates (Sep 2025); Cooper Fitch KSA 2026 via Gulf Business; Progressive live Abu Dhabi contract ad; Ma'aden live role ads; aggregator/weak sources labelled inline | **No public KSA/Gulf bill-rate data exists anywhere** — all contract-margin verdicts are pay × markup inference; Hays KSA 2026, Michael Page KSA 2026, Cooper Fitch full tables, NES Fircroft snapshots are gated; Careermine publishes no free ME survey; SPE survey member-gated since 2020 |
 
-**Pending before page prioritization is final:** (1) Ahrefs Saudi-DB volumes/KD for §C/F terms (the Ahrefs connection made in the desktop IDE on 2 Sep is **not visible inside this cloud-agent run** — to give the agent access, add the Ahrefs MCP server to the cloud-agent environment config, or add an Ahrefs API key as a Cloud Agent secret so the API can be called directly); (2) KSA-locale browser spot-check of the KEEP terms, including AI Overview / Copilot observation; (3) owner confirmation of evidence for the 1992 Aramco heritage claim; (4) commercial validation of KSA mining/EPCM contractor **bill rates** (e.g. against Bechtel/Hatch/Worley placement data) before committing to the £300–400/day margin in that niche — perm economics are already evidenced.
+**Pending before page prioritization is final:** (1) ~~Ahrefs Saudi-DB volumes/KD~~ **DONE 2 Sep 2026 pm** — outcome: long-tail untracked, KD≈0, demand concentrated in generic head terms (§C0); (2) KSA-locale browser spot-check of the KEEP terms, including AI Overview / Copilot observation; (3) owner confirmation of evidence for the 1992 Aramco heritage claim; (4) commercial validation of KSA mining/EPCM contractor **bill rates** (e.g. against Bechtel/Hatch/Worley placement data) before committing to the £300–400/day margin in that niche — perm economics are already evidenced; (5) GSC verification of the claimed Dubai/Abu Dhabi/Bahrain/Qatar ranks (not visible in Ahrefs — §G risk 8).
 
 ---
 
@@ -324,4 +361,4 @@ The owner supplied a second AI's report. Its headline ranking: (1) senior commis
 | Hold | Renewables (KSA) | Narrow gap + contract-margin failure; perm-led phase 2 |
 | Reject | Generic engineering recruitment; generic exec search; EOR terms; all candidate "jobs" terms | No gap / wrong intent / wrong economics |
 
-**Agreement note:** both analyses independently reject renewables-as-lead, generic engineering, and candidate-term traps; both converge on senior, scarce, project-critical positioning with Saudization-fluent copy. The residual disagreement is ranking, driven by one factual correction (commissioning contract economics) and one SERP mis-description (the O&G head term). Ahrefs Saudi-DB metrics remain the final arbiter for page-priority ordering within the kept set.
+**Agreement note:** both analyses independently reject renewables-as-lead, generic engineering, and candidate-term traps; both converge on senior, scarce, project-critical positioning with Saudization-fluent copy. The residual disagreement is ranking, driven by one factual correction (commissioning contract economics) and one SERP mis-description (the O&G head term). **Post-Ahrefs note (2 Sep pm):** the Ahrefs pull could not arbitrate the long-tail (all 23 terms untracked in sa/us/gb), so the live-SERP register remains the decision layer; Ahrefs did confirm KD≈0 wherever measurable and a DR-0 client baseline — both consistent with the gap-first ranking above. `[AHREFS]`
