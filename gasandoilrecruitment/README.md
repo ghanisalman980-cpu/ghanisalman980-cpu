@@ -43,14 +43,31 @@ python3 -m http.server 8080
    `config.js`. Never reuse a number from another site; never publish a personal
    mobile.
 2. **Forms.** All forms (`data-lead-form`) POST JSON to `SITE_CONFIG.formEndpoint`.
-   Set it to the Cloudflare Worker URL that forwards into n8n (Google Sheet row +
-   GA4 Measurement Protocol event + owner alert). Until then forms run in demo
-   mode and nothing is transmitted. CV file inputs currently capture the filename
-   only — wire real upload handling in the Worker if needed.
+   The endpoint is the Cloudflare Worker in `worker/` — it validates the payload,
+   drops honeypot spam, and forwards to the shared n8n webhook (Google Sheet row +
+   GA4 Measurement Protocol event + owner alert). Deploy it once the domain is on
+   Cloudflare:
+
+   ```bash
+   cd worker
+   npx wrangler login
+   npx wrangler deploy
+   npx wrangler secret put N8N_WEBHOOK_URL   # the n8n workflow's webhook URL
+   ```
+
+   Then set `formEndpoint` in `assets/js/config.js` to the Worker URL (or the
+   `forms.gasandoilrecruitment.com/lead` route — see `worker/wrangler.toml`).
+   Until then forms run in demo mode and nothing is transmitted. The Worker is
+   fail-closed: with no webhook secret it returns 503 and tells visitors to
+   email/call, so leads are never silently dropped. CV file inputs currently
+   capture the filename only — wire real upload handling in the Worker if needed.
 3. **Email.** `hello@gasandoilrecruitment.com` via Cloudflare Email Routing to the
    brand Gmail inbox.
-4. **Analytics.** Add the GA4 snippet and Cloudflare Web Analytics beacon before
-   launch (both are free; see the tracking-tools guide in the repo root).
+4. **Analytics.** Set `ga4MeasurementId` and/or `cfBeaconToken` in
+   `assets/js/config.js` — `analytics.js` loads GA4 / Cloudflare Web Analytics
+   only when configured (both free; see the tracking-tools guide in the repo
+   root). Form submits fire a client-side `generate_lead` event; the server-side
+   Measurement Protocol event from n8n remains the attribution record of truth.
 5. **SEO checks.** Run the homepage and a job page through the Schema Markup
    Validator, submit `sitemap.xml` in Search Console, and import into Bing
    Webmaster Tools.

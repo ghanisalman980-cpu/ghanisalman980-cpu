@@ -21,6 +21,17 @@
   document.querySelectorAll("form[data-lead-form]").forEach(function (form) {
     var status = form.querySelector(".form-status");
 
+    // Honeypot: invisible to humans, irresistible to bots. The Worker drops
+    // any submission where this field is filled.
+    var trap = document.createElement("input");
+    trap.type = "text";
+    trap.name = "_gotcha";
+    trap.tabIndex = -1;
+    trap.autocomplete = "off";
+    trap.setAttribute("aria-hidden", "true");
+    trap.style.cssText = "position:absolute;left:-9999px;top:-9999px;height:1px;width:1px;overflow:hidden";
+    form.appendChild(trap);
+
     function show(kind, msg) {
       if (!status) return;
       status.className = "form-status " + kind;
@@ -62,6 +73,11 @@
         if (btn) { btn.disabled = false; btn.textContent = btn.dataset.label; }
         if (ok) {
           form.reset();
+          // Client-side GA4 lead event (only when analytics.js has loaded gtag).
+          // The server-side Measurement Protocol event from n8n is the record of truth.
+          if (typeof window.gtag === "function") {
+            window.gtag("event", "generate_lead", { form_name: data.form, page_location: data.page });
+          }
           show("ok", msg);
         } else {
           show("err", msg);

@@ -16,5 +16,9 @@ window.SITE_CONFIG = {
   phoneHref: "+441224000000",
   email: "hello@gasandoilrecruitment.com",
   address: "Prime Four, Kingswells, Aberdeen AB15 8PU",
-  formEndpoint: "", // e.g. "https://forms.gasandoilrecruitment.com/lead"
+  formEndpoint: "", // e.g. "https://forms.gasandoilrecruitment.com/lead" (see worker/)
+
+  // Analytics — both empty = nothing loads. Set at launch (see README).
+  ga4MeasurementId: "", // e.g. "G-XXXXXXXXXX"
+  cfBeaconToken: "", // Cloudflare Web Analytics site token
 };

@@ -1,0 +1,13 @@
+name = "gor-lead-endpoint"
+main = "lead-endpoint.js"
+compatibility_date = "2026-09-01"
+
+# Set the shared n8n webhook URL as a secret (never commit it):
+#   npx wrangler secret put N8N_WEBHOOK_URL
+#
+# Optional: route a clean subdomain to this Worker instead of using the
+# workers.dev URL, then set SITE_CONFIG.formEndpoint to match:
+#
+# routes = [
+#   { pattern = "forms.gasandoilrecruitment.com/lead", zone_name = "gasandoilrecruitment.com" }
+# ]
