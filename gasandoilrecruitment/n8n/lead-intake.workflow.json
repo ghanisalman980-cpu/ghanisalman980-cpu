@@ -1,0 +1,178 @@
+{
+  "name": "Lead intake — gasandoilrecruitment.com",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## Setup (5 minutes)\n\n1. **Credentials**: attach your Google Sheets OAuth2 credential to *Append lead row*, and your Gmail OAuth2 credential to *Email owner alert*.\n2. **Environment variables** on the n8n host:\n   - `GA4_MEASUREMENT_ID` — e.g. `G-XXXXXXXXXX`\n   - `GA4_API_SECRET` — GA4 → Admin → Data streams → Measurement Protocol API secrets\n   - `OWNER_ALERT_EMAIL` — where lead alerts go\n3. In *Append lead row*, pick the lead-log Google Sheet and the `Leads` tab (create the header row first — see README).\n4. **Activate** the workflow, copy the production webhook URL, and set it as the Worker's secret:\n   `npx wrangler secret put N8N_WEBHOOK_URL`\n\nThe GA4 node is set to continue-on-fail: an analytics hiccup never loses a lead.",
+        "height": 420,
+        "width": 320
+      },
+      "id": "note-setup",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [-240, -120]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "gasandoilrecruitment-lead",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-receive",
+      "name": "Receive lead",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [-240, 380],
+      "webhookId": "gasandoilrecruitment-lead"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Normalise the Worker envelope into flat fields for the Sheet/GA4/email nodes.\nconst lead = $json.body ?? $json;\nconst f = lead.fields || {};\n\n// GA4 Measurement Protocol needs a client_id; derive a stable one from email+site.\nlet h = 0;\nconst s = (f.email || \"anonymous\") + (lead.site || \"\");\nfor (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0;\n\nreturn [{\n  json: {\n    receivedAt: lead.receivedAt || new Date().toISOString(),\n    site: lead.site || \"\",\n    form: lead.form || \"\",\n    name: f.name || \"\",\n    email: f.email || \"\",\n    phone: f.phone || \"\",\n    role: f.role || f.discipline || f.topic || \"\",\n    message: f.message || \"\",\n    cv: f.cv || \"\",\n    page: lead.page || \"\",\n    ip: lead.ip || \"\",\n    country: lead.country || \"\",\n    userAgent: lead.userAgent || \"\",\n    clientId: String(h || 1)\n  }\n}];"
+      },
+      "id": "code-normalize",
+      "name": "Normalise lead",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [0, 380]
+    },
+    {
+      "parameters": {
+        "resource": "sheetWithinDocument",
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "PASTE_LEAD_LOG_SHEET_ID",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Leads",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Received At": "={{ $json.receivedAt }}",
+            "Site": "={{ $json.site }}",
+            "Form": "={{ $json.form }}",
+            "Name": "={{ $json.name }}",
+            "Email": "={{ $json.email }}",
+            "Phone": "={{ $json.phone }}",
+            "Role / Interest": "={{ $json.role }}",
+            "Message": "={{ $json.message }}",
+            "CV": "={{ $json.cv }}",
+            "Page": "={{ $json.page }}",
+            "IP": "={{ $json.ip }}",
+            "Country": "={{ $json.country }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            { "id": "Received At", "displayName": "Received At", "required": false, "defaultMatch": false, "display": true, "type": "string", "canBeUsedToMatch": true },
+            { "id": "Site", "displayName": "Site", "required": false, "defaultMatch": false, "display": true, "type": "string", "canBeUsedToMatch": true },
+            { "id": "Form", "displayName": "Form", "required": false, "defaultMatch": false, "display": true, "type": "string", "canBeUsedToMatch": true },
+            { "id": "Name", "displayName": "Name", "required": false, "defaultMatch": false, "display": true, "type": "string", "canBeUsedToMatch": true },
+            { "id": "Email", "displayName": "Email", "required": false, "defaultMatch": false, "display": true, "type": "string", "canBeUsedToMatch": true },
+            { "id": "Phone", "displayName": "Phone", "required": false, "defaultMatch": false, "display": true, "type": "string", "canBeUsedToMatch": true },
+            { "id": "Role / Interest", "displayName": "Role / Interest", "required": false, "defaultMatch": false, "display": true, "type": "string", "canBeUsedToMatch": true },
+            { "id": "Message", "displayName": "Message", "required": false, "defaultMatch": false, "display": true, "type": "string", "canBeUsedToMatch": true },
+            { "id": "CV", "displayName": "CV", "required": false, "defaultMatch": false, "display": true, "type": "string", "canBeUsedToMatch": true },
+            { "id": "Page", "displayName": "Page", "required": false, "defaultMatch": false, "display": true, "type": "string", "canBeUsedToMatch": true },
+            { "id": "IP", "displayName": "IP", "required": false, "defaultMatch": false, "display": true, "type": "string", "canBeUsedToMatch": true },
+            { "id": "Country", "displayName": "Country", "required": false, "defaultMatch": false, "display": true, "type": "string", "canBeUsedToMatch": true }
+          ]
+        },
+        "options": {}
+      },
+      "id": "sheets-append",
+      "name": "Append lead row",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.2,
+      "position": [240, 380],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://www.google-analytics.com/mp/collect",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            { "name": "measurement_id", "value": "={{ $env.GA4_MEASUREMENT_ID }}" },
+            { "name": "api_secret", "value": "={{ $env.GA4_API_SECRET }}" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"client_id\": \"{{ $json.clientId }}\",\n  \"events\": [\n    {\n      \"name\": \"lead_received\",\n      \"params\": {\n        \"site\": \"{{ $json.site }}\",\n        \"form_name\": \"{{ $json.form }}\",\n        \"role\": \"{{ $json.role }}\",\n        \"page_location\": \"{{ $json.page }}\"\n      }\n    }\n  ]\n}",
+        "options": {}
+      },
+      "id": "ga4-event",
+      "name": "Fire GA4 event",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [480, 380],
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "send",
+        "sendTo": "={{ $env.OWNER_ALERT_EMAIL }}",
+        "subject": "=New lead — {{ $json.form }} — {{ $json.name }}",
+        "emailType": "text",
+        "message": "=New {{ $json.form }} lead on {{ $json.site }}\n\nName: {{ $json.name }}\nEmail: {{ $json.email }}\nPhone: {{ $json.phone }}\nRole / interest: {{ $json.role }}\nCV: {{ $json.cv || '—' }}\n\nMessage:\n{{ $json.message || '—' }}\n\nPage: {{ $json.page }}\nReceived: {{ $json.receivedAt }}\nIP: {{ $json.ip }} ({{ $json.country }})",
+        "options": {}
+      },
+      "id": "gmail-alert",
+      "name": "Email owner alert",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [720, 380],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "",
+          "name": "Gmail account (owner alerts)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={ \"ok\": true }",
+        "options": {}
+      },
+      "id": "respond-ok",
+      "name": "Respond OK",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [960, 380]
+    }
+  ],
+  "connections": {
+    "Receive lead": {
+      "main": [[{ "node": "Normalise lead", "type": "main", "index": 0 }]]
+    },
+    "Normalise lead": {
+      "main": [[{ "node": "Append lead row", "type": "main", "index": 0 }]]
+    },
+    "Append lead row": {
+      "main": [[{ "node": "Fire GA4 event", "type": "main", "index": 0 }]]
+    },
+    "Fire GA4 event": {
+      "main": [[{ "node": "Email owner alert", "type": "main", "index": 0 }]]
+    },
+    "Email owner alert": {
+      "main": [[{ "node": "Respond OK", "type": "main", "index": 0 }]]
+    }
+  },
+  "settings": { "executionOrder": "v1" },
+  "staticData": null,
+  "pinData": {}
+}

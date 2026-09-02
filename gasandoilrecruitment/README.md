@@ -61,6 +61,16 @@ python3 -m http.server 8080
    fail-closed: with no webhook secret it returns 503 and tells visitors to
    email/call, so leads are never silently dropped. CV file inputs currently
    capture the filename only — wire real upload handling in the Worker if needed.
+
+   The n8n side is ready to import: `n8n/lead-intake.workflow.json` (webhook →
+   normalise → Google Sheets row → GA4 Measurement Protocol event → owner email
+   alert → respond 200). In n8n: **Workflows → Import from File**, attach Google
+   Sheets + Gmail credentials, set `GA4_MEASUREMENT_ID`, `GA4_API_SECRET` and
+   `OWNER_ALERT_EMAIL` env vars, create the `Leads` sheet header row
+   (`Received At, Site, Form, Name, Email, Phone, Role / Interest, Message, CV,
+   Page, IP, Country`), activate, and paste the production webhook URL into the
+   Worker secret above. Full setup notes are on the sticky note inside the
+   workflow itself.
 3. **Email.** `hello@gasandoilrecruitment.com` via Cloudflare Email Routing to the
    brand Gmail inbox.
 4. **Analytics.** Set `ga4MeasurementId` and/or `cfBeaconToken` in
