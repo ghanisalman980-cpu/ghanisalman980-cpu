@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /job.html
+
+Sitemap: https://gasandoilrecruitment.com/sitemap.xml
