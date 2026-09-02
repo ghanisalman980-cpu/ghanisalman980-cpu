@@ -219,11 +219,11 @@ Templated Hire Resolve pages, aggregators, and **news + LinkedIn recruiter posts
 
 ### D5. "hse manager recruitment agency saudi arabia" — KEEP (supporting)
 
-Live set: NADIA job post, Hire Resolve templated page, Al Ahad (local manpower), LinkedIn company page, Talent Arabia. No O&G-specialist HSE page. Supporting section/page only; expected low volume (PENDING AHREFS).
+Live set: NADIA job post, Hire Resolve templated page, Al Ahad (local manpower), LinkedIn company page, Talent Arabia. No O&G-specialist HSE page. Supporting section/page only; untracked in Ahrefs SA (zero measurable volume) `[AHREFS]`.
 
 ### D6. "western engineers saudi arabia recruitment" — KEEP (positioning term)
 
-Live set: The Saudi Elite (exact "Connecting Western Professionals With Saudi Arabia" positioning — **construction-only**), Mase Consulting (UK technical-sales/engineering recruiter announcing KSA expansion), Progressive, NES. Proof the positioning ranks; nobody runs it for energy/mining. This is the brand-level differentiator and should be the hub's core message, with the term itself likely low-volume (PENDING AHREFS) but high-conversion. `[SERP]` `[INFERENCE]`
+Live set: The Saudi Elite (exact "Connecting Western Professionals With Saudi Arabia" positioning — **construction-only**), Mase Consulting (UK technical-sales/engineering recruiter announcing KSA expansion), Progressive, NES. Proof the positioning ranks; nobody runs it for energy/mining. This is the brand-level differentiator and should be the hub's core message; the term itself is untracked in Ahrefs SA (zero measurable volume) but high-conversion. `[SERP]` `[AHREFS]` `[INFERENCE]`
 
 ### Rejected-with-reason summary
 
